@@ -1,0 +1,698 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Belém PA — Nossa Viagem 🌿</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --green-deep: #1a3a2a;
+    --green-mid: #2d5a3d;
+    --green-light: #4a8c5c;
+    --gold: #c8a04a;
+    --gold-light: #e8c97a;
+    --cream: #f5f0e8;
+    --text: #1a2a1e;
+    --text-light: #4a5a4e;
+    --white: #fdfcf8;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--cream);
+    color: var(--text);
+    overflow-x: hidden;
+  }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    background: var(--green-deep);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 40px 24px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: 
+      radial-gradient(ellipse 80% 60% at 50% 0%, rgba(74,140,92,0.25) 0%, transparent 70%),
+      radial-gradient(ellipse 60% 40% at 80% 100%, rgba(200,160,74,0.15) 0%, transparent 60%);
+  }
+
+  .hero-deco {
+    font-size: clamp(80px, 20vw, 160px);
+    line-height: 1;
+    margin-bottom: 24px;
+    animation: float 4s ease-in-out infinite;
+    position: relative;
+    z-index: 1;
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-12px); }
+  }
+
+  .hero-label {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 16px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(48px, 10vw, 88px);
+    font-weight: 700;
+    color: var(--white);
+    line-height: 1.05;
+    margin-bottom: 8px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .hero h1 span {
+    color: var(--gold-light);
+    font-style: italic;
+  }
+
+  .hero-subtitle {
+    font-size: 15px;
+    color: rgba(255,255,255,0.6);
+    font-weight: 300;
+    margin-top: 16px;
+    letter-spacing: 1px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .hero-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(200,160,74,0.2);
+    border: 1px solid rgba(200,160,74,0.4);
+    color: var(--gold-light);
+    padding: 8px 20px;
+    border-radius: 100px;
+    font-size: 13px;
+    font-weight: 500;
+    margin-top: 32px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .scroll-hint {
+    position: absolute;
+    bottom: 32px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    color: rgba(255,255,255,0.3);
+    font-size: 11px;
+    letter-spacing: 2px;
+    animation: bounce 2s ease-in-out infinite;
+    z-index: 1;
+  }
+
+  @keyframes bounce {
+    0%, 100% { transform: translateX(-50%) translateY(0); }
+    50% { transform: translateX(-50%) translateY(6px); }
+  }
+
+  /* INTRO STRIP */
+  .intro-strip {
+    background: var(--gold);
+    padding: 18px 24px;
+    text-align: center;
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 17px;
+    color: var(--green-deep);
+  }
+
+  /* DAYS SECTION */
+  .days-section {
+    padding: 80px 24px;
+    max-width: 860px;
+    margin: 0 auto;
+  }
+
+  .section-header {
+    text-align: center;
+    margin-bottom: 60px;
+  }
+
+  .section-header .eyebrow {
+    font-size: 11px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--green-light);
+    font-weight: 500;
+    margin-bottom: 12px;
+  }
+
+  .section-header h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(32px, 6vw, 52px);
+    color: var(--green-deep);
+    line-height: 1.1;
+  }
+
+  .day-card {
+    background: var(--white);
+    border-radius: 24px;
+    overflow: hidden;
+    margin-bottom: 32px;
+    box-shadow: 0 4px 24px rgba(26,58,42,0.08);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .day-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 40px rgba(26,58,42,0.14);
+  }
+
+  .day-header {
+    padding: 28px 32px 20px;
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+    border-bottom: 1px solid rgba(26,58,42,0.07);
+  }
+
+  .day-number {
+    font-family: 'Playfair Display', serif;
+    font-size: 56px;
+    font-weight: 700;
+    color: var(--green-light);
+    opacity: 0.3;
+    line-height: 1;
+    flex-shrink: 0;
+  }
+
+  .day-title-block h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    color: var(--green-deep);
+    margin-bottom: 4px;
+  }
+
+  .day-title-block p {
+    font-size: 13px;
+    color: var(--text-light);
+    font-weight: 300;
+  }
+
+  .day-body {
+    padding: 8px 0;
+  }
+
+  .stop {
+    display: grid;
+    grid-template-columns: 72px 1fr;
+    gap: 0 16px;
+    padding: 20px 32px;
+    border-bottom: 1px solid rgba(26,58,42,0.05);
+    transition: background 0.2s;
+  }
+
+  .stop:last-child { border-bottom: none; }
+  .stop:hover { background: rgba(74,140,92,0.04); }
+
+  .stop-time {
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--gold);
+    letter-spacing: 1px;
+    padding-top: 3px;
+    text-align: right;
+  }
+
+  .stop-content {}
+
+  .stop-name {
+    font-weight: 500;
+    font-size: 15px;
+    color: var(--green-deep);
+    margin-bottom: 4px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .stop-emoji {
+    font-size: 16px;
+  }
+
+  .stop-note {
+    font-size: 13px;
+    color: var(--text-light);
+    line-height: 1.6;
+    font-weight: 300;
+  }
+
+  .stop-tag {
+    display: inline-block;
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 2px 10px;
+    border-radius: 100px;
+    margin-left: 4px;
+  }
+
+  .tag-food { background: rgba(200,160,74,0.15); color: #8a6a1a; }
+  .tag-night { background: rgba(26,58,42,0.1); color: var(--green-mid); }
+  .tag-culture { background: rgba(100,80,200,0.1); color: #4a3a8a; }
+  .tag-nature { background: rgba(74,140,92,0.15); color: var(--green-mid); }
+
+  /* TIPS SECTION */
+  .tips-section {
+    background: var(--green-deep);
+    padding: 80px 24px;
+  }
+
+  .tips-inner {
+    max-width: 860px;
+    margin: 0 auto;
+  }
+
+  .tips-section .eyebrow {
+    font-size: 11px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--gold);
+    font-weight: 500;
+    margin-bottom: 12px;
+    text-align: center;
+  }
+
+  .tips-section h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(28px, 5vw, 44px);
+    color: var(--white);
+    text-align: center;
+    margin-bottom: 48px;
+    line-height: 1.1;
+  }
+
+  .tips-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 20px;
+  }
+
+  .tip-card {
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 16px;
+    padding: 24px;
+    transition: background 0.2s;
+  }
+
+  .tip-card:hover { background: rgba(255,255,255,0.1); }
+
+  .tip-icon { font-size: 28px; margin-bottom: 12px; }
+
+  .tip-card h4 {
+    font-family: 'Playfair Display', serif;
+    font-size: 16px;
+    color: var(--gold-light);
+    margin-bottom: 8px;
+  }
+
+  .tip-card p {
+    font-size: 13px;
+    color: rgba(255,255,255,0.6);
+    line-height: 1.6;
+    font-weight: 300;
+  }
+
+  /* FOOD SECTION */
+  .food-section {
+    padding: 80px 24px;
+    max-width: 860px;
+    margin: 0 auto;
+  }
+
+  .food-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 16px;
+    margin-top: 48px;
+  }
+
+  .food-item {
+    background: var(--white);
+    border-radius: 16px;
+    padding: 24px 16px;
+    text-align: center;
+    box-shadow: 0 2px 12px rgba(26,58,42,0.06);
+    transition: transform 0.2s;
+  }
+
+  .food-item:hover { transform: translateY(-3px); }
+  .food-item .food-emoji { font-size: 36px; margin-bottom: 10px; }
+  .food-item h4 { font-size: 14px; font-weight: 500; color: var(--green-deep); margin-bottom: 4px; }
+  .food-item p { font-size: 12px; color: var(--text-light); font-weight: 300; }
+
+  /* FOOTER */
+  footer {
+    background: var(--green-deep);
+    border-top: 1px solid rgba(200,160,74,0.2);
+    padding: 40px 24px;
+    text-align: center;
+  }
+
+  footer p {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 18px;
+    color: var(--gold-light);
+    margin-bottom: 8px;
+  }
+
+  footer small {
+    font-size: 12px;
+    color: rgba(255,255,255,0.3);
+    letter-spacing: 1px;
+  }
+
+  /* ANIMATIONS */
+  .fade-in {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+
+  .fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  @media (max-width: 600px) {
+    .stop { grid-template-columns: 52px 1fr; gap: 0 12px; padding: 16px 20px; }
+    .day-header { padding: 24px 20px 16px; }
+    .day-number { font-size: 40px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-deco">🌿</div>
+  <p class="hero-label">Roteiro de viagem · 4 dias</p>
+  <h1>Belém,<br><span>Pará</span></h1>
+  <p class="hero-subtitle">Uma aventura amazônica a dois</p>
+  <div class="hero-pill">✈️ Planejamento completo dia a dia</div>
+  <div class="scroll-hint">
+    <span>▼</span>
+    <span style="font-size:10px">ROLE PRA VER</span>
+  </div>
+</section>
+
+<!-- INTRO STRIP -->
+<div class="intro-strip">
+  "A cidade das mangueiras, do tacacá, do açaí e da maior festa religiosa do Brasil."
+</div>
+
+<!-- DAYS -->
+<section class="days-section">
+  <div class="section-header fade-in">
+    <p class="eyebrow">Programação</p>
+    <h2>Os 4 dias perfeitos</h2>
+  </div>
+
+  <!-- DIA 1 -->
+  <div class="day-card fade-in">
+    <div class="day-header">
+      <div class="day-number">01</div>
+      <div class="day-title-block">
+        <h3>Cidade Velha &amp; Ver-o-Peso</h3>
+        <p>História, fauna amazônica e jantar à beira da baía</p>
+      </div>
+    </div>
+    <div class="day-body">
+      <div class="stop">
+        <div class="stop-time">06:00</div>
+        <div class="stop-content">
+          <div class="stop-name"><span class="stop-emoji">🛒</span> Ver-o-Peso Market <span class="stop-tag tag-culture">Ícone</span></div>
+          <div class="stop-note">O mercado mais icônico da Amazônia. Chegue cedo pra ver o movimento: especiarias, açaí fresquinho, cheiro-verde e as garças voando por cima das bancas.</div>
+        </div>
+      </div>
+      <div class="stop">
+        <div class="stop-time">09:00</div>
+        <div class="stop-content">
+          <div class="stop-name"><span class="stop-emoji">🦜</span> Mangal das Garças <span class="stop-tag tag-nature">Natureza</span></div>
+          <div class="stop-note">Parque com aves amazônicas soltas, borboletas, capivaras e piranhas. Suba a torre pra ter uma vista panorâmica de Belém do alto. Nota 4.8 ⭐</div>
+        </div>
+      </div>
+      <div class="stop">
+        <div class="stop-time">12:00</div>
+        <div class="stop-content">
+          <div class="stop-name"><span class="stop-emoji">🍽️</span> Restaurante Manjar das Garças <span class="stop-tag tag-food">Almoço</span></div>
+          <div class="stop-note">Dentro do próprio parque, com vista pra natureza. Buffet por ~R$84 com peixes amazônicos (filhote, pescada) e cervejas artesanais Amazon Beer.</div>
+        </div>
+      </div>
+      <div class="stop">
+        <div class="stop-time">19:00</div>
+        <div class="stop-content">
+          <div class="stop-name"><span class="stop-emoji">🌊</span> Casa do Saulo das Onze Janelas <span class="stop-tag tag-food">Jantar</span></div>
+          <div class="stop-note">Restaurante histórico com vista deslumbrante para a Baía do Guajarás. Música ao vivo, brisa do rio e tacacá imperdível. Nota 4.6 ⭐</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DIA 2 -->
+  <div class="day-card fade-in">
+    <div class="day-header">
+      <div class="day-number">02</div>
+      <div class="day-title-block">
+        <h3>Basílica + Gastronomia + Docas</h3>
+        <p>Culinária paraense e pôr do sol à beira-rio</p>
+      </div>
+    </div>
+    <div class="day-body">
+      <div class="stop">
+        <div class="stop-time">09:00</div>
+        <div class="stop-content">
+          <div class="stop-name"><span class="stop-emoji">⛪</span> Basílica de Nossa Senhora de Nazaré <span class="stop-tag tag-culture">Cultura</span></div>
+          <div class="stop-note">Uma das igrejas mais belas do Brasil. Arquitetura neogótica impressionante, símbolo do famoso Círio de Nazaré. Nota 4.9 ⭐ — leva máquina.</div>
+        </div>
+      </div>
+      <div class="stop">
+        <div class="stop-time">12:00</div>
+        <div class="stop-content">
+          <div class="stop-name"><span class="stop-emoji">🫙</span> Amazônia na Cuia <span class="stop-tag tag-food">Almoço</span></div>
+          <div class="stop-note">O melhor da culinária paraense. Mini-tigelas pra experimentar tudo: maniçoba, pato no tucupi, tacacá, caruru. Nota 4.9 ⭐ — o restaurante mais indicado de Belém.</div>
+        </div>
+      </div>
+      <div class="stop">
+        <div class="stop-time">17:00</div>
+        <div class="stop-content">
+          <div class="stop-name"><span class="stop-emoji">🏭</span> Estação das Docas <span class="stop-tag tag-culture">Passeio</span></div>
+          <div class="stop-note">Armazéns ingleses de 1909 transformados em complexo gastronômico à beira da baía. Amazon Beer artesanal + pôr do sol + lojinhas de artesanato. Nota 4.8 ⭐</div>
+        </div>
+      </div>
+      <div class="stop">
+        <div class="stop-time">22:00</div>
+        <div class="stop-content">
+          <div class="stop-name"><span class="stop-emoji">🎸</span> Studio Pub <span class="stop-tag tag-night">Noite</span></div>
+          <div class="stop-note">O bar de rock mais querido de Belém. Música ao vivo quase todo dia, boa pizza e ambiente separado pra quem quer conversar. Vai até 4h nas sex/sáb.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DIA 3 -->
+  <div class="day-card fade-in">
+    <div class="day-header">
+      <div class="day-number">03</div>
+      <div class="day-title-block">
+        <h3>Natureza + Balada</h3>
+        <p>Trilha de bike, pôr do sol e a noite toda</p>
+      </div>
+    </div>
+    <div class="day-body">
+      <div class="stop">
+        <div class="stop-time">07:00</div>
+        <div class="stop-content">
+          <div class="stop-name"><span class="stop-emoji">🚴</span> Parque Estadual do Utinga <span class="stop-tag tag-nature">Natureza</span></div>
+          <div class="stop-note">Alugue bikes por ~R$40/h. Trilha de 4km com capivaras, piranhas no lago, borboletas e muito verde. Leve protetor solar e água. Fecha às 17h (fecha terça).</div>
+        </div>
+      </div>
+      <div class="stop">
+        <div class="stop-time">17:30</div>
+        <div class="stop-content">
+          <div class="stop-name"><span class="stop-emoji">🌅</span> Ver-o-Rio <span class="stop-tag tag-nature">Pôr do Sol</span></div>
+          <div class="stop-note">Orla aberta 24h, o melhor ponto de Belém pra ver o sol descer no rio Amazonas. Tapioca e comida regional na beira d'água. Só precisa aparecer.</div>
+        </div>
+      </div>
+      <div class="stop">
+        <div class="stop-time">20:00</div>
+        <div class="stop-content">
+          <div class="stop-name"><span class="stop-emoji">🎤</span> Cosmos Club <span class="stop-tag tag-night">Noite</span></div>
+          <div class="stop-note">Bar com karaokê no Umarizal. Ótimo pra esquentar a noite, fazer graça e tomar umas antes da balada. Abre qua a dom a partir das 19h.</div>
+        </div>
+      </div>
+      <div class="stop">
+        <div class="stop-time">23:00</div>
+        <div class="stop-content">
+          <div class="stop-name"><span class="stop-emoji">🕺</span> Pulse Club <span class="stop-tag tag-night">Balada</span></div>
+          <div class="stop-note">Casa antiga reformada com área de club + quintal/bar aberto. Só abre sex e sáb, das 21h às 4h. Vale chegar mais tarde, o pico é depois da meia-noite.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DIA 4 -->
+  <div class="day-card fade-in">
+    <div class="day-header">
+      <div class="day-number">04</div>
+      <div class="day-title-block">
+        <h3>Compras &amp; Despedida</h3>
+        <p>Últimas memórias e volta carregada de presentes</p>
+      </div>
+    </div>
+    <div class="day-body">
+      <div class="stop">
+        <div class="stop-time">08:00</div>
+        <div class="stop-content">
+          <div class="stop-name"><span class="stop-emoji">🌶️</span> Ver-o-Peso — Compras <span class="stop-tag tag-culture">Compras</span></div>
+          <div class="stop-note">Última chance de levar: pimenta-de-cheiro, jambu seco, castanhas, ervas medicinais, perfumes amazônicos e artesanato indígena. Pechincha!</div>
+        </div>
+      </div>
+      <div class="stop">
+        <div class="stop-time">12:00</div>
+        <div class="stop-content">
+          <div class="stop-name"><span class="stop-emoji">🍺</span> Estação das Docas — Almoço final <span class="stop-tag tag-food">Almoço</span></div>
+          <div class="stop-note">Almoço de despedida com vista pro rio. Sorvete de açaí ou cupuaçu de sobremesa. Última Amazon Beer. Deixa a viagem fechar com chave de ouro.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- COMIDAS -->
+<section class="food-section">
+  <div class="section-header fade-in">
+    <p class="eyebrow">Gastronomia</p>
+    <h2>O que comer em Belém</h2>
+  </div>
+  <div class="food-grid fade-in">
+    <div class="food-item">
+      <div class="food-emoji">🍲</div>
+      <h4>Tacacá</h4>
+      <p>Caldo quente com tucupi, jambu e camarão. Anestesia a língua!</p>
+    </div>
+    <div class="food-item">
+      <div class="food-emoji">🦆</div>
+      <h4>Pato no Tucupi</h4>
+      <p>Pato cozido no caldo amarelo de mandioca com folhas de jambu.</p>
+    </div>
+    <div class="food-item">
+      <div class="food-emoji">🫙</div>
+      <h4>Maniçoba</h4>
+      <p>A feijoada paraense. Folha de mandioca cozida por dias com carnes defumadas.</p>
+    </div>
+    <div class="food-item">
+      <div class="food-emoji">🍧</div>
+      <h4>Açaí Nativo</h4>
+      <p>Bem diferente do que tem no Sul. Mais grosso, mais amargo e servido com peixe.</p>
+    </div>
+    <div class="food-item">
+      <div class="food-emoji">🎋</div>
+      <h4>Cupuaçu</h4>
+      <p>Fruta amazônica exclusiva. Sorvete, suco, chocolate... experimenta tudo.</p>
+    </div>
+    <div class="food-item">
+      <div class="food-emoji">🍺</div>
+      <h4>Amazon Beer</h4>
+      <p>Cerveja artesanal local. Tem versão com frutas amazônicas. Imperdível.</p>
+    </div>
+  </div>
+</section>
+
+<!-- TIPS -->
+<section class="tips-section">
+  <div class="tips-inner">
+    <p class="eyebrow">Dicas essenciais</p>
+    <h2>Leva isso na cabeça</h2>
+    <div class="tips-grid">
+      <div class="tip-card fade-in">
+        <div class="tip-icon">☀️</div>
+        <h4>Calor e Chuva</h4>
+        <p>Belém é quente e úmida o ano todo. Leve roupas leves, protetor solar FPS 50+ e uma chuva pode cair à tarde — leva guarda-chuva pequeno.</p>
+      </div>
+      <div class="tip-card fade-in">
+        <div class="tip-icon">👜</div>
+        <h4>Segurança</h4>
+        <p>No Ver-o-Peso e áreas turísticas, atenção com pertences. Evite celular aparente em ruas pouco movimentadas à noite.</p>
+      </div>
+      <div class="tip-card fade-in">
+        <div class="tip-icon">🚖</div>
+        <h4>Transporte</h4>
+        <p>Use 99 ou Uber pra se locomover. O trânsito pode ser pesado em horário de pico — deixa tempo extra nos deslocamentos.</p>
+      </div>
+      <div class="tip-card fade-in">
+        <div class="tip-icon">📅</div>
+        <h4>Dias de Fechamento</h4>
+        <p>Mangal das Garças fecha segunda. Parque do Utinga fecha terça. Casa do Saulo fecha segunda. Planeje com antecedência!</p>
+      </div>
+      <div class="tip-card fade-in">
+        <div class="tip-icon">💧</div>
+        <h4>Hidratação</h4>
+        <p>Beba muita água. A umidade engana — você transpira mais do que percebe. Tenha uma garrafinha sempre à mão.</p>
+      </div>
+      <div class="tip-card fade-in">
+        <div class="tip-icon">📸</div>
+        <h4>Melhores Fotos</h4>
+        <p>Torre do Mangal das Garças (vista aérea), Basílica de Nazaré (arquitetura), Ver-o-Rio (pôr do sol) e Estação das Docas (à noite com iluminação).</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>Vai ser incrível. 🌿</p>
+  <small>Belém, Pará · 4 dias · Roteiro feito com carinho</small>
+</footer>
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
